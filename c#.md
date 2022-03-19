@@ -1,4 +1,4 @@
-# unity c#学习123
+# unity c#学习
 
 
 
@@ -62,13 +62,27 @@ void start()
 
 
 
-## 条件语句
+## 乱七八糟
 
-同c语言；
+```c#
+两点之间的距离 比较      当前位置             目标位置
+if(Vector2.Distance(transform.position, movePos.position) < 0.1f)
+    
+时间控制
+if(waitTime <= 0)
+{
+    movePos.position = GetRandomPos();
+    waitTime = startWaitTime;
+}
+else
+{
+    waitTime -= Time.deltaTime;//按照当前的时间减少
+}
 
+两个点之间移动                                    起点                  终点               移动速度
+ transform.position = Vector2.MoveTowards(transform.position, movePos.position, speed*Time.deltaTime);
 
-
-
+```
 
 
 
@@ -118,7 +132,7 @@ void start()
 
 # unity C#用到的代码
 
-## 移动跳跃代码
+## Move && Jump
 
 ```c#
 public Rigibody2D rb;
@@ -172,7 +186,7 @@ void GroundMovement()//左右移动
 
 void Jump()//跳跃
 {
-    if(isGroud)
+    if(isGround)
     {
         jumpCount = 2;//二连跳
         isJump = false;
@@ -193,3 +207,144 @@ void Jump()//跳跃
     
 }
 ```
+
+## Enemy(面向对象)
+
+```c#
+public abstract class Enemy:MonoBehaviour//成为父类
+{
+    public int health;//设置生命值
+	public int damage;//设置伤害
+    
+    
+    public float FlashTime;//受伤闪烁时间
+    private SpriteRenderer sr;
+    private Color oringinalColor; 
+
+    public void start()//必须用public使得其他项目可以调用
+    {
+		sr = GetComponent<SpriteRenderer>();
+        originalColor = sr.color;
+    }
+
+    public void Update()//必须用public使得其他项目可以调用
+    {
+		if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void TakeDamage(int damage)//必须用public使得其他项目可以调用（在下面攻击中调用了）
+    {
+        health -= damage;
+         FlashColor(FlashTime)；
+    }
+    
+    //受伤闪烁变色
+    void FlashColor(float time)
+    {
+        sr.color = Color.red;
+        Invoke("ResetColor", time);//延迟恢复颜色
+    }
+    
+    //颜色还原
+    void ResetColor()
+    {
+        sr.color = originalColor;
+    }
+}
+
+```
+
+```c#
+//运用到攻击上面的代码
+public int damage;//伤害值
+
+void OnTriggerEnter2D(Collider2D other)
+{ 
+    if(other.gameObject.CompareTag("Enemy"))
+    {
+        other.GetComponet<Enemy>().TakeDamage(damage);
+    }
+}
+```
+
+```c#
+public class EnemyBat : Enemy//归属于上面父类中的子类
+{
+
+    public float speed;
+    public float startWaitTime;
+    private float waitTime;
+    
+    public Transform movePos;
+    public Transform leftDownPos;
+    public Transform rightUpPos;
+    
+    
+	public void Start()//public必用
+    {
+        base.Start();
+        waitTime = startWaitTime;
+        movePos.position = GetRandomPos();
+    }
+    
+    public void Update()//public必用
+    {
+        base.Update();//此行用于调用父类的Update
+        transform.position = Vector2.MoveTowards(transform.position, movePos.position, speed*Time.deltaTime);
+        
+        if(Vector2.Distance(transform.position, movePos.position) < 0.1f)//距离控制
+        {
+            if(waitTime <= 0)
+            {
+                movePos.position = GetRandomPos();
+                waitTime = startWaitTime;
+            }
+            else
+            {
+                waitTime -= Time.deltaTime;//时间控制
+            }
+        }
+    }
+    
+	
+    
+	void GetRandomPos()
+    {
+        Vector2 rndPos = new Vector2(Random.Range(leftDownPos.position,x, rightUpPos.x), Random.Range(leftDownPos.position.y, rightUpPos.position.y));
+        return rndPos;
+    }
+}
+
+```
+
+```c#
+public class EnemySmartBat : Enemy
+{
+    public float speed;
+    public float radius;
+    
+    public void Start()
+    {
+        base.Start();
+        playerTransform = GameObject.FindGameObjectWithTag("player").GetComponent<Transform>();
+    }
+    
+    public boid Update()
+    {
+        base.Update();
+        if(playerTransform != NULL)
+        {
+            float distance = (transform.position - playerTransform.position).sqrMagnitude;
+            
+            if(distance < radius)
+            {
+                transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, speed *Time.deltaTime);
+            }
+        }
+    }
+}
+```
+

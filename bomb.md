@@ -1,0 +1,154 @@
+# 炸弹人
+
+
+
+## 炸弹动画
+
+炸弹的动画从引爆到爆炸会有一定的时间，通过代码控制中间过渡的时间
+
+```C#
+using UnityEngine;
+
+public float startTime;
+pulbic float waitTime;
+public Animator anim;
+
+void Start()
+{
+    anim = GetComponent<Animator>();
+    startTime = Time.time;
+}
+
+void Updata()
+{
+    
+    //当炸弹出现时间超过等待时间时，直接切换到引爆的动画
+    if(Time.time > startTime + waitTime)
+    {
+        //“bomb_explotion”是引爆动画的名称，必须和自己设置的动画名称一样
+        anim.Play("bomb_explotion");
+    }
+    
+}
+
+```
+
+
+
+
+
+## 炸弹爆炸效果
+
+爆炸会有一定的范围，并且会**对周围的物体产生一个作用力**用于击退物体
+
+但是具体需要**击退哪些物体可以通过物体的图层**确定
+
+```c#
+using UnityEngine;
+
+public float bombForce;//爆炸产生的力
+public LayerMask targetLayer;//获取爆炸击飞物体的图层（可以在面板中设置）
+private Collider2d coll;//用于防止炸弹爆炸后把自己的模型炸飞
+private Rigidbody2D rb;//防止下坠
+
+
+void Start()
+{
+    coll = GetComponent<Collider2D>();
+    rb = GetComponent<Rigidbody2D>();
+}
+
+
+public boid Explotion()//检测碰撞体并施加力,通过动画事件帧引导爆炸
+{
+     //防止炸弹把自己炸飞
+    coll.enabled = false;
+    
+   	//创建数组获取爆炸击飞物体
+    //OverlapCircleAll可以获取范围内的所有物体返回在数组中
+    //获取以transform.position为中心radius为半径中targetLayer选中图层的物体
+    Collider2D[] aroundObjects = Physics2D.OverlapCircleAll(transform.position, radius, targetLayer)
+        
+       //防止自己下落把重力设置为0
+        rb.gravityScale = 0;
+        //给受爆炸物体添加力
+        foreach(var item in aroundObjects)
+        {
+            //要获取物体的位置以控制爆炸反弹方向
+            Vctor3 pos = trasform.position - item.transform.position;
+            
+            //对物体提供一个力炸飞
+            item.GetComponent<Rigidbody2D>().AddForce((-pos + Vctor3.up) * bombForce,  forceMode2D.Impulse);
+        }
+}
+
+
+//在爆炸动画最后一帧插入事件帧消除炸弹
+public void DestroyThis()
+{
+    Destroy(gameObject);
+}
+
+```
+
+
+
+**用此代码可以查看到一个圆形范围**
+
+```c#
+using UnityEngine;
+
+public float radius;
+
+public void OnDrawGizmos()
+{
+   					//        中心               半径
+    Gizmos.	DrawWireSphere(transform.position, radius);
+}
+```
+
+
+
+## 人物丢炸弹
+
+炸弹首先得设置为预制体
+
+在代码中实现炸弹的丢置
+
+```c#
+using UnityEngine;
+
+[Header("Attack")]
+public GameObject bombPrefab;
+//设置攻击之间的间隔频率
+public float nextAttack = 0;
+public float attackRate;
+
+void Updata()
+{
+    if(Input.GetKeyDown(KeyCode.J))
+    {
+        Attack();
+    }
+}
+
+public void Attack()
+{
+    if(Time.time > nextAttack)
+    {
+        //通过预制体释放炸弹
+        Instantiate(bombPrefab, transform.position, bombPrefab.transform.rotation);
+        
+        //刷新攻击间隔时间
+        nextAttack = Time.time + attackRate;
+    }
+}
+```
+
+
+
+
+
+## 炸弹效果
+
+可以给炸弹添加一个材质使它具有摩擦力和弹力更真实

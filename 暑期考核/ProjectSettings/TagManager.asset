@@ -1,0 +1,78 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Ground
+  - Aim
+  - Enemy
+  - PlayerAttack
+  - Item
+  - AngelAim
+  - Goust
+  - Shield
+  - fire
+  - Circle
+  - Line
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - Player
+  - Water
+  - UI
+  - fire
+  - Enemy
+  - BossAttack
+  - Item
+  - NPCAciton
+  - PlayerAttack
+  - Ground
+  - Wind
+  - EnemyCheck
+  - Camara
+  - AngelAim
+  - "\u76FE\u724C"
+  - NPC
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: back
+    uniqueID: 3229706151
+    locked: 0
+  - name: ground
+    uniqueID: 4059429327
+    locked: 0
+  - name: "\u4F20\u9001\u95E8"
+    uniqueID: 383705115
+    locked: 0
+  - name: Player
+    uniqueID: 2396367701
+    locked: 0
+  - name: other
+    uniqueID: 726142339
+    locked: 0
+  - name: "\u6258\u513F\u6240"
+    uniqueID: 2827505981
+    locked: 0
+  - name: Sword_1
+    uniqueID: 3963317587
+    locked: 0
+  - name: item
+    uniqueID: 2808428363
+    locked: 0

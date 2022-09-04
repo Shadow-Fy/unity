@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2914753147347703202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2914753147347703200}
+  - component: {fileID: 2914753147347703203}
+  m_Layer: 0
+  m_Name: WeaponManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2914753147347703200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914753147347703202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 22.809483, y: -0.6162774, z: -6.212759}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2914753147347703203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2914753147347703202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71cab3af016ad534e953d14873f7bd05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallswordprefeb: {fileID: 7832552252766432045, guid: b97990f3ee6d2cc40a3a95be925552be, type: 3}
+  starprefeb: {fileID: 809534743281103332, guid: 1314a0d2d57d9074c95859b22d9a4b93, type: 3}
+  greenprefeb: {fileID: 8403894858172181516, guid: fea299afe23b2a24fafb71963781f973, type: 3}
+  catprefeb: {fileID: 4614386187300043245, guid: 3416df95604807a4c861ada868823fab, type: 3}
+  arcticiceprefeb: {fileID: 8286577901216487134, guid: 9f3c408900c6d1341844c0d08a1c829c, type: 3}

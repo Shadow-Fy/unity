@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 001f9d6ea61572b45abab85705115a81, type: 3}
+  m_Name: Wing
+  m_EditorClassIdentifier: 
+  itemtype: 3
+  itemname: "\u7FC5\u8180"
+  itemicon: {fileID: -7680876810482968810, guid: 5586f33c6246dd847bc0ec56aa8a17d5, type: 3}
+  itemamount: 1
+  useabledata: {fileID: 0}
+  description: "\u53EF\u4EE5\u83B7\u5F97\u98DE\u884C\u80FD\u529B"
+  stackble: 0
+  wingdata: {fileID: 11400000, guid: ef19fbf593f7a3e44846581cad0232a3, type: 2}
+  attackdata: {fileID: 0}

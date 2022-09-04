@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 611f038c523038a4aac8733623112d4e, type: 3}
+  m_Name: -1
+  m_EditorClassIdentifier: 
+  questname: "\u53D8\u5F3A-1"
+  description: "\u4E0D\u65AD\u6D88\u706D\u5237\u602A\u573A\u7684\u602A\u7269\uFF0C\u53D8\u5F97\u66F4\u5F3A"
+  isstarted: 0
+  iscomplete: 0
+  isfinished: 0
+  questrequires:
+  - name: "\u8759\u8760"
+    requireamount: 10
+    currentamount: 0
+  - name: "\u7F51\u763E\u5C11\u5E74"
+    requireamount: 10
+    currentamount: 0
+  - name: "\u5C0F\u7EA2\u5E3D"
+    requireamount: 10
+    currentamount: 0
+  rewards:
+  - itemdata: {fileID: 11400000, guid: 14859468269c5b4438c6f385e09cce26, type: 2}
+    amount: 1
